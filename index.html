@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chúc Mừng Năm Mới 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
     <style>
         /* --- CẤU HÌNH CƠ BẢN --- */
         body,
@@ -27,12 +26,15 @@
         /* --- VIDEO NỀN --- */
         #bg-video {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
         }
 
         /* --- MÀN HÌNH CHỜ --- */
@@ -51,42 +53,65 @@
             transition: opacity 1s ease;
         }
 
-        /* NÚT BẤM */
+        /* --- BỨC THƯ (KÍCH THƯỚC 520x340) --- */
         #start-btn {
-            padding: 15px 40px;
-            font-size: 2rem;
-            font-family: 'Great Vibes', cursive;
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #ffffff;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 15px #ffffff;
-            animation: pulse 2s infinite;
-            transition: all 0.3s ease;
-        }
-
-        #start-btn:hover {
+            position: relative;
+            width: 520px;
+            height: 330px;
             background: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            perspective: 1500px;
+            padding: 0;
+        }
+
+        /* Nắp phong bì */
+        #start-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 260px solid transparent;
+            border-right: 260px solid transparent;
+            border-top: 200px solid #f9f9f9;
+            z-index: 5;
+            transform-origin: top;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+        }
+
+        /* CHỮ TRÊN THƯ - Đã chỉnh để dịch xuống dưới */
+        #start-btn::after {
+            content: "Thiệp Chúc Mừng Năm Mới 2026";
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
             color: #d60000;
-            box-shadow: 0 0 30px #ffffff;
+            z-index: 2;
+            padding: 0 20px;
+            text-align: center;
+            /* Dịch chuyển chữ xuống dưới */
+            margin-top: 80px;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+        /* Hiệu ứng mở nắp */
+        #start-btn:hover {
+            transform: scale(1.05) translateY(-10px);
         }
 
-        /* --- HẠT LẤP LÁNH --- */
+        #start-btn:hover::before {
+            transform: rotateX(150deg);
+            z-index: 1;
+        }
+
+        /* --- HIỆU ỨNG HẠT LẤP LÁNH --- */
         .trail {
             position: absolute;
             width: 6px;
@@ -111,7 +136,7 @@
             }
         }
 
-        /* --- NỘI DUNG --- */
+        /* --- NỘI DUNG SAU KHI MỞ --- */
         .scene {
             position: absolute;
             top: 50%;
@@ -135,14 +160,16 @@
         }
 
         h1 {
-            font-size: 6rem;
+            font-size: 8rem;
+            margin: 0 0 10px 0;
             color: #ff3333;
             animation: float 4s ease-in-out infinite;
         }
 
         .year {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
             margin-bottom: 20px;
         }
 
@@ -150,6 +177,7 @@
             font-size: 2.5rem;
             line-height: 1.4;
             color: #ffffff;
+            text-shadow: 2px 2px 4px #000, 0 0 10px rgba(0, 0, 0, 0.5);
             max-width: 800px;
             margin: 0 auto;
         }
@@ -159,6 +187,7 @@
             margin-right: 10px;
             opacity: 0;
             transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 1.5s ease;
+            will-change: transform, opacity;
         }
 
         .word.visible {
@@ -178,48 +207,33 @@
             }
         }
 
-        /* ================= MOBILE ================= */
         @media (max-width: 768px) {
-
-            body,
-            html {
-                cursor: default;
-            }
-
             h1 {
-                font-size: 3rem;
-                animation: none;
+                font-size: 3.5rem;
             }
 
             .year {
+                font-size: 2rem;
+            }
+
+            #message-container {
                 font-size: 1.8rem;
             }
 
-            #message-container {
-                font-size: 1.5rem;
-            }
-
             #start-btn {
-                font-size: 1.6rem;
-                padding: 14px 30px;
+                width: 300px;
+                height: 200px;
             }
 
-            .card {
-                width: 90%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.4rem;
+            #start-btn::before {
+                border-left-width: 150px;
+                border-right-width: 150px;
+                border-top-width: 120px;
             }
 
-            .year {
+            #start-btn::after {
+                margin-top: 40px;
                 font-size: 1.5rem;
-            }
-
-            #message-container {
-                font-size: 1.3rem;
             }
         }
     </style>
@@ -236,19 +250,22 @@
     </audio>
 
     <div id="overlay">
-        <button id="start-btn">Mở Thiệp Chúc Tết</button>
+        <button id="start-btn"></button>
+        <p
+            style="color: white; margin-top: 25px; font-family: sans-serif; letter-spacing: 3px; font-size: 0.9rem; opacity: 0.5;">
+        </p>
     </div>
 
     <div class="scene" id="scene">
-        <div class="card">
-            <h1>Chúc Mừng Năm Mới</h1>
-            <div class="year">Xuân Bính Ngọ 2026</div>
+        <div class="card" id="card">
+            <h1>Chúc Mừng Năm Mới 2026</h1>
+            <div class="year">Happy New Year 2026</div>
             <div id="message-container"></div>
         </div>
     </div>
 
     <script>
-        const wishes = "Đầu xuân năm mới, tôi chúc bạn cùng gia đình luôn luôn dồi dào sức khỏe, may mắn song hành, an khang thịnh vượng. Chúc cho năm nay vạn sự như mơ, mọi điều mong ước đều sớm thành hiện thực !!!";
+        const wishes = "Đầu xuân năm mới, chúc bạn cùng gia đình luôn dồi dào sức khỏe, vạn sự hanh thông, may mắn song hành. Chúc cho năm mới của bạn tràn đầy năng lượng, mọi dự định đều phi nước đại và sớm gặt hái được những thành công rực rỡ vượt mong đợi!!!";
 
         const startBtn = document.getElementById('start-btn');
         const overlay = document.getElementById('overlay');
@@ -259,50 +276,54 @@
 
         startBtn.addEventListener('click', () => {
             video.muted = false;
-            video.play();
-            audio.play();
-
+            video.volume = 0.5;
+            video.play().catch(e => console.log("Lỗi video: ", e));
+            audio.volume = 1.0;
+            audio.play().catch(e => console.log("Lỗi audio: ", e));
             overlay.style.opacity = '0';
-            setTimeout(() => overlay.style.display = 'none', 1000);
+            setTimeout(() => { overlay.style.display = 'none'; }, 1000);
             sceneContainer.style.opacity = '1';
             setTimeout(animateText, 500);
         });
 
-        wishes.split(' ').forEach(word => {
+        const words = wishes.split(' ');
+        words.forEach((word) => {
             const span = document.createElement('span');
             span.textContent = word;
             span.className = 'word';
-
-            const x = Math.random() * 1000 - 500;
-            const y = Math.random() * 1000 - 500;
-            const r = Math.random() * 360 - 180;
-
-            span.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg) scale(3)`;
+            const randomX = Math.floor(Math.random() * 1000 - 500);
+            const randomY = Math.floor(Math.random() * 1000 - 500);
+            const randomRotate = Math.floor(Math.random() * 360 - 180);
+            span.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(3)`;
             container.appendChild(span);
         });
 
         function animateText() {
-            document.querySelectorAll('.word').forEach((span, i) => {
-                setTimeout(() => span.classList.add('visible'), i * 150);
+            document.querySelectorAll('.word').forEach((span, index) => {
+                setTimeout(() => {
+                    span.classList.add('visible');
+                }, index * 150);
             });
         }
 
-        document.addEventListener('mousemove', e => createTrail(e.pageX, e.pageY));
-        document.addEventListener('touchmove', e => {
-            const t = e.touches[0];
-            if (t) createTrail(t.pageX, t.pageY);
-        }, { passive: true });
+        document.addEventListener('mousemove', (e) => {
+            createTrail(e.pageX, e.pageY);
+        });
 
         function createTrail(x, y) {
             const trail = document.createElement('div');
             trail.className = 'trail';
-            trail.style.left = x + 'px';
-            trail.style.top = y + 'px';
+            const offsetX = (Math.random() - 0.5) * 10;
+            const offsetY = (Math.random() - 0.5) * 10;
+            trail.style.left = (x + offsetX) + 'px';
+            trail.style.top = (y + offsetY) + 'px';
+            const colors = ['#ffd700', '#ffffff', '#ffeb3b'];
+            trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+            trail.style.boxShadow = `0 0 10px ${trail.style.background}`;
             document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 1000);
+            setTimeout(() => { trail.remove(); }, 1000);
         }
     </script>
-
 </body>
 
 </html>
